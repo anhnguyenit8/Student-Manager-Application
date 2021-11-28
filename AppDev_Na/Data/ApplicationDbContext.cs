@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using AppDev_Na.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace AppDev_Na.Data
@@ -10,6 +11,12 @@ namespace AppDev_Na.Data
         {
         }
         
-        
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Trainee> Trainee { get; set; }
+        public DbSet<Trainer> Trainer { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<Enrollment> Enrollments { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Course> Courses { get; set; }
     }
 }
