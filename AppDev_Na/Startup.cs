@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AppDev_Na.Data;
+using AppDev_Na.Initalizer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +33,7 @@ namespace AppDev_Na
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddScoped<IDbInitalizer, DbInitalizer>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.Configure<IdentityOptions>(options =>
@@ -68,7 +70,7 @@ namespace AppDev_Na
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitalizer dbInitalizer)
         {
             if (env.IsDevelopment())
             {
@@ -83,12 +85,14 @@ namespace AppDev_Na
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            
+            
             app.UseRouting();
             
             app.UseAuthentication();
             app.UseAuthorization();
-
+            
+            dbInitalizer.Initalizer();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
