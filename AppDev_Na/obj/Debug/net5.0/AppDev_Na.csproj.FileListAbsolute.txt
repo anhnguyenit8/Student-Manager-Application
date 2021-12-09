@@ -488,3 +488,12 @@ C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Ide
 C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
 C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Views\Shared\Components\UserName\Default.cshtml.g.cs
+C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Authenticated\Views\Users\Index.cshtml.g.cs
+C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Authenticated\Views\Users\EditStaff.cshtml.g.cs
+C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Authenticated\Views\Users\EditTrainee.cshtml.g.cs
+C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Authenticated\Views\Users\EditTrainer.cshtml.g.cs
+C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Authenticated\Views\Users\ForgotPassword.cshtml.g.cs
+C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Authenticated\Views\Users\ResetPasswordConfimation.cshtml.g.cs
+C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Authenticated\Views\Users\ResetPasswordFail.cshtml.g.cs
+C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Authenticated\Views\Categories\Index.cshtml.g.cs
+C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Authenticated\Views\Categories\Upsert.cshtml.g.cs

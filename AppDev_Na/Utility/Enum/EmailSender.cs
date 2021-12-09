@@ -7,7 +7,7 @@ namespace AppDev_Na.Utility.Enum
     {
         public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            throw new System.NotImplementedException();
+            return null;
         }
     }
 }

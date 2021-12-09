@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using AppDev_Na.Data;
+using AppDev_Na.Models;
 using AppDev_Na.Utility.Enum;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -18,7 +20,7 @@ using Microsoft.Extensions.Logging;
 
 namespace AppDev_Na.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
+    [Authorize (Roles = Constant.Role_Admin + "," + Constant.Role_Staff)]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -78,6 +80,95 @@ namespace AppDev_Na.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
+            GetRole();
+            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+        }
+
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        {
+            returnUrl ??= Url.Content("~/");
+            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            if (ModelState.IsValid)
+            {
+                ApplicationUser applicationUser = new ApplicationUser();
+                Trainee trainee = new Trainee();
+                Trainer trainer = new Trainer();
+                IdentityResult result = new IdentityResult();
+                if (Input.Role == Constant.Role_Trainee)
+                {
+                    trainee = new Trainee()
+                    {
+                        UserName = Input.Email,
+                        Email = Input.Email,
+                        Role = Input.Role,
+                        FullName = Input.Name,
+                    };
+                    result = await _userManager.CreateAsync(trainee, Input.Password);
+                    
+                } else if (Input.Role == Constant.Role_Trainer)
+                {
+                    trainer = new Trainer()
+                    {
+                        UserName = Input.Email,
+                        Email = Input.Email,
+                        Role = Input.Role,
+                        FullName = Input.Name,
+                    };
+                    result = await _userManager.CreateAsync(trainer, Input.Password);
+                }
+                else
+                {
+                    applicationUser = new ApplicationUser()
+                    {
+                        UserName = Input.Email,
+                        Email = Input.Email,
+                        Role = Input.Role,
+                        FullName = Input.Name,
+                    };
+                    result = await _userManager.CreateAsync(applicationUser, Input.Password);
+                }
+
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("User created a new account with password.");
+                    if (Input.Role == Constant.Role_Trainee)
+                    {
+                        await _userManager.AddToRoleAsync(trainee, trainee.Role); 
+                        
+                    } else if (Input.Role == Constant.Role_Trainer)
+                    {
+                        await _userManager.AddToRoleAsync(trainer, trainer.Role); 
+                        
+                    }
+                    else 
+                    {
+                        await _userManager.AddToRoleAsync(applicationUser, applicationUser.Role); 
+                        
+                    }
+                    
+                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    {
+                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                    }
+                    else
+                    {
+                        return RedirectToPage("RegisterConfirmation",
+                                new {email = Input.Email, returnUrl = returnUrl});
+
+                    }
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+            GetRole();
+            // If we got this far, something failed, redisplay form
+            return Page();
+        }
+
+        private void GetRole()
+        {
             Input = new InputModel()
             {
                 RoleList = _roleManager.Roles.Where(u => u.Name != Constant.Role_Trainee).Select(x => x.Name).Select(
@@ -99,50 +190,21 @@ namespace AppDev_Na.Areas.Identity.Pages.Account
                         })
                 };
             }
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        private async Task SendEmail(ApplicationUser user, string returnUrl)
         {
-            returnUrl ??= Url.Content("~/");
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
-            {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
-                var result = await _userManager.CreateAsync(user, Input.Password);
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User created a new account with password.");
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+            var callbackUrl = Url.Page(
+                "/Account/ConfirmEmail",
+                pageHandler: null,
+                values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                protocol: Request.Scheme);
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
+            await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
-                }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
-            }
-
-            // If we got this far, something failed, redisplay form
-            return Page();
         }
     }
 }

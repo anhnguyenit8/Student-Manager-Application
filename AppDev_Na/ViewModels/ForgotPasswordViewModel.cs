@@ -2,7 +2,7 @@
 
 namespace AppDev_Na.ViewModels
 {
-    public class ForgotPassworkViewModel
+    public class ForgotPasswordViewModel
     {
       public string Email { get; set; }
     }

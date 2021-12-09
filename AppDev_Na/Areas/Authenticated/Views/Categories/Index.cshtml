@@ -1,0 +1,57 @@
+﻿@using AppDev_Na.Utility
+@using AppDev_Na.Utility.Enum
+@model IEnumerable<AppDev_Na.Models.Category>
+@{
+    ViewBag.Title = "User Profile";
+    Layout = "_Layout";
+}
+
+<h2>List Of Categories</h2>
+<br/>
+<a class="btn btn-primary" asp-area="Authenticated" asp-controller="Categories" asp-action="Upsert">&nbsp; Create a Category</a>
+    <div class ="col-6">
+                <form class="form-inline my-2 my-lg-0 float-right">
+                    <input id="myInput" class="form-control mr-sm-2" type="text" placeholder="Search">
+                </form>
+            </div>
+    <br/>
+    <br/>
+    
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id #</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tblData">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>
+                        <a asp-controller="Categories" asp-action="Upsert" asp-route-id="@item.Id" class="btn btn-default btn-info">Edit</a> 
+                        <a asp-controller="Categories" onclick="return confirm('Are you sure about that ?')" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-default btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#tblData tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}
