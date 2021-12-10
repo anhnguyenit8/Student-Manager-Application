@@ -1,0 +1,48 @@
+﻿@model AppDev_Na.ViewModels.OverviewViewModel
+
+@if (Model.TrainerList.Any())
+{
+    <h2 class="text-center">Trainer</h2>
+    <table class="table table-bordered">
+        <thread>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thread>
+        <tbody>
+        @foreach (var trainer in Model.TrainerList)
+        {
+            <tr>
+                <td>@trainer.Trainer.FullName</td>
+                <td>@trainer.Trainer.Email</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@if (Model.TraineeList.Any())
+{
+    <h2 class="text-center">Trainee</h2>
+    <table class="table table-bordered">
+        <thread>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Specialty</th>
+            </tr>
+        </thread>
+        <tbody>
+        @foreach (var trainee in Model.TraineeList)
+        {
+            <tr>
+                <td>@trainee.Trainee.FullName</td>
+                <td>@trainee.Trainee.Email</td>
+                <td>@trainee.Trainee.Specialty</td>
+                
+            </tr>
+        }
+        </tbody>
+    </table>
+}

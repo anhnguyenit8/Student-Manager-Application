@@ -14,6 +14,6 @@ namespace AppDev_Na.Models
         [Required]
         public string TrainerId { get; set; }
         [ForeignKey("TrainerId")]
-        public Trainee Trainer { get; set; }
+        public Trainer Trainer { get; set; }
     }
 }
