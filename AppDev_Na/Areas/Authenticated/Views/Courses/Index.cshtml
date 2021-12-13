@@ -1,25 +1,31 @@
 ﻿@model IEnumerable<AppDev_Na.Models.Course>
 @{
-    ViewBag.Title = "Title";
+    ViewBag.Title = "Course";
     Layout = "_Layout";
 }
 
-<h2>List Of Courses</h2>
-<br/>
-<a class="btn btn-primary" asp-controller="Courses" asp-action="Upsert">&nbsp;Create a Course</a>
-<div>
+<div class="p-4 border rounded bg-white">
+    <div class="row">
+            <div class="col-6">
+                <h2 class="text-primary">List of Courses </h2>
+            </div>
+            <div class="col-6 text-right">
+                <a class="btn btn-primary" asp-controller="Courses" asp-action="Upsert">&nbsp;Create a Course</a>
+            </div>
+        </div>
     
-    <form class="form-inline my-2 my-lg-0 float-right">
-        <input id="myInput" class="form-control mr-sm-2" type="text" placeholder="Search">
-    </form>
-</div>
+    <div >
+        <form class="form-inline my-2 my-lg-0 float-right">
+            <input id="myInput" class="form-control mr-sm-2" type="text" placeholder="Search">
+        </form>
+    </div>
     <br/>
     <br/>
     
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Id #</th>
+                <th>Id</th>
                 <th>Course Name</th>
                 <th>Description</th>
                 <th>Category</th>
@@ -42,7 +48,7 @@
             }
         </tbody>
     </table>
-
+</div>
 @section Scripts
 {
     <script>

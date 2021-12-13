@@ -13,7 +13,7 @@
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Trainning System</a>
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Trainning Portal</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -31,7 +31,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Authenticated" asp-controller="Users" asp-action="Index">User Profile</a>
                         </li>
-                        
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Menu
@@ -41,7 +41,7 @@
                                 <a class="dropdown-item" asp-area="Authenticated" asp-controller="Courses" asp-action="Index">Courses</a>
                                 <a class="dropdown-item" asp-area="Authenticated" asp-controller="Assignments" asp-action="Index">Assignments</a>
                                 <a class="dropdown-item" asp-area="Authenticated" asp-controller="Enrollments" asp-action="Index">Enrollments</a>
-                                
+
                             </div>
                         </li>
                         <li class="nav-item">
@@ -60,10 +60,10 @@
                             <a class="nav-link text-dark" asp-area="Authenticated" asp-controller="Trainee" asp-action="Index">Courses</a>
                         </li>
                     }
-                    
+
                 </ul>
-                
-                <partial name ="_LoginPartial"/>
+
+                <partial name="_LoginPartial"/>
             </div>
         </div>
     </nav>
