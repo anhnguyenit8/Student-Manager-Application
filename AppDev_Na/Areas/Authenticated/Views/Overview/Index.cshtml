@@ -1,38 +1,46 @@
 ﻿@model IEnumerable<AppDev_Na.Models.Course>
+@{
+    ViewBag.Title = "Overview";
+    Layout = "_Layout";
+}
+<br/>
+<div class="p-4 border rounded bg-white">
+    <div class="row">
+            <div class="col-6">
+                <h2 class="text-primary">Overview</h2>
+            </div>
+    </div>
+    <div>
+        <form class="form-inline my-2 my-lg-0 float-right">
+            <input id="myInput" class="form-control mr-sm-2" type="text" placeholder="Search">
+        </form>
+    </div>
+    <br/>
+    <br/>
 
-<h2>Overview</h2>
-<br/>
-<div class="col-6">
-    <form class="form-inline my-2 my-lg-0 float-right">
-        <input id="myInput" class="form-control mr-sm-2" type="text" placeholder="Search">
-    </form>
-</div>
-<br/>
-<br/>
-    
-<table class="table table-bordered">
-    <thead>
-    <tr>
-        <th>Course Name</th>
-        <th>Description</th>
-        <th>Category</th>
-    </tr>
-    </thead>
-    <tbody id="tblData">
-    @foreach (var course in Model)
-    {
+    <table class="table table-bordered">
+        <thead>
         <tr>
-            <td>@course.Name</td>
-            <td>@course.Description</td>
-            <td>@course.Category.Name</td>
-            <td>
-                <a asp-action="Overview" asp-route-id="@course.Id" class="btn btn-default btn-info">Details</a>
-            </td>
+            <th>Course Name</th>
+            <th>Description</th>
+            <th>Category</th>
         </tr>
-    }
-    </tbody>
-</table>
-
+        </thead>
+        <tbody id="tblData">
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td>@course.Name</td>
+                <td>@course.Description</td>
+                <td>@course.Category.Name</td>
+                <td>
+                    <a asp-action="Overview" asp-route-id="@course.Id" class="btn btn-default btn-info">Details</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
 @section Scripts
 {
     <script>

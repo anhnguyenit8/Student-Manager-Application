@@ -505,3 +505,7 @@ C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Aut
 C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Authenticated\Views\Enrollments\Index.cshtml.g.cs
 C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Authenticated\Views\Overview\Index.cshtml.g.cs
 C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Authenticated\Views\Overview\Overview.cshtml.g.cs
+C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Authenticated\Views\Trainer\Index.cshtml.g.cs
+C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Authenticated\Views\Trainer\Details.cshtml.g.cs
+C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Authenticated\Views\Trainee\Details.cshtml.g.cs
+C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\obj\Debug\net5.0\Razor\Areas\Authenticated\Views\Trainee\Index.cshtml.g.cs
