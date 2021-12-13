@@ -1,10 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AppDev_Na.Models
 {
     public class Trainee : ApplicationUser
     {
+        
         [Required]
-        public string Specialty { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        [Required]
+        public string Education { get; set; }
     }
 }

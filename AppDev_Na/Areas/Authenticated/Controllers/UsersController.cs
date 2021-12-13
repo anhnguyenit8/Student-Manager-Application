@@ -149,7 +149,9 @@ namespace AppDev_Na.Areas.Authenticated.Controllers
             userdb.FullName = user.FullName;
             userdb.Age = user.Age;
             userdb.Address = user.Address;
-            userdb.Specialty = user.Specialty;
+
+            userdb.DateOfBirth = user.DateOfBirth;
+            userdb.Education = user.Education;
             _db.Trainee.Update(userdb);
             _db.SaveChanges();
             return RedirectToAction(nameof(Index), "Users");
@@ -187,8 +189,8 @@ namespace AppDev_Na.Areas.Authenticated.Controllers
             userdb.FullName = user.FullName;
             userdb.Age = user.Age;
             userdb.Address = user.Address;
-            userdb.DateOfBirth = user.DateOfBirth;
-            userdb.Education = user.Education;
+            userdb.Specialty = user.Specialty;
+
             _db.Trainer.Update(userdb);
             _db.SaveChanges();
             return RedirectToAction(nameof(Index), "Users");
