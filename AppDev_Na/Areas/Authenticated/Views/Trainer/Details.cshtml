@@ -1,0 +1,30 @@
+﻿@model IEnumerable<AppDev_Na.Models.Enrollment>
+
+@{
+    Layout = "_Layout";
+}
+<h2 class="text-center">Trainee</h2>
+    <table class="table table-bordered">
+        <thread>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>DateOfBirth</th>
+                <th>Education</th>
+                
+            </tr>
+        </thread>
+        <tbody>
+        @foreach (var trainee in Model)
+        {
+            <tr>
+                <td>@trainee.Trainee.FullName</td>
+                <td>@trainee.Trainee.Email</td>
+                <td>@trainee.Trainee.Age</td>
+                <td>@trainee.Trainee.DateOfBirth</td>
+                <td>@trainee.Trainee.Education</td>
+            </tr>
+        }
+        </tbody>
+    </table>

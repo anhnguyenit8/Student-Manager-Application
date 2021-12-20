@@ -1,0 +1,97 @@
+﻿@using AppDev_Na.Utility
+@using AppDev_Na.Utility.Enum
+@model IEnumerable<AppDev_Na.Models.ApplicationUser>
+@{
+    ViewBag.Title = "User Profile";
+    Layout = "_Layout";
+}
+
+
+<div class="p-4 border rounded bg-white">
+
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-primary">List of User </h2>
+        </div>
+        <div class="col-6 text-right">
+            <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register"><i class="fa fa-cus"></i>&nbsp; Create New User</a>
+        </div>
+    </div>
+    <div>
+        <form class="form-inline my-2 my-lg-0 float-right">
+            <input id="myInput" class="form-control mr-sm-2" type="text" placeholder="Search">
+        </form>
+    </div>
+    
+    <br/>
+    <br/>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tblData">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FullName</td>
+                    <td>@item.Email</td>
+                    <td>@item.Role</td>
+                    <td>
+                        @if (User.IsInRole(Constant.Role_Staff))
+                        {
+                            @if (@item.Role == "Trainer")
+                            {
+                                <a asp-controller="Users" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-default btn-info">Edit</a>
+                            }
+                            @if (@item.Role == "Trainee")
+                            {
+                                <a asp-controller="Users" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-default btn-info">Edit</a>
+                                <a asp-controller="Users" onclick="return confirm('Are you sure about that ?')" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-default btn-danger btn-info">Delete</a>
+                                <a asp-controller="Users" asp-action="ForgotPassword" asp-route-id="@item.Id" class="btn btn-default btn-info">Reset</a>
+                            }
+                        }
+                        @if (User.IsInRole(Constant.Role_Admin))
+                        {
+                            @if (@item.Role == "Trainer")
+                            {
+                                <a asp-controller="Users" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-default btn-info">Edit</a>
+                                <a asp-controller="Users" onclick="return confirm('Are you sure about that ?')" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-default btn-danger btn-info">Delete</a>
+                                <a asp-controller="Users" asp-action="ForgotPassword" asp-route-id="@item.Id" class="btn btn-default btn-info">Reset</a>
+                            }
+                            @if (@item.Role == "Staff")
+                            {
+                                <a asp-controller="Users" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-default btn-info">Edit</a>
+                                <a asp-controller="Users" onclick="return confirm('Are you sure about that ?')" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-default btn-danger btn-info">Delete</a>
+                                <a asp-controller="Users" asp-action="ForgotPassword" asp-route-id="@item.Id" class="btn btn-default btn-info">Reset</a>
+                            }
+                            @if (@item.Role == "Admin")
+                            {
+                                <a asp-controller="Users" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-default btn-info">Edit</a>
+                                <a asp-controller="Users" onclick="return confirm('Are you sure about that ?')" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-default btn-danger btn-info">Delete</a>
+                                <a asp-controller="Users" asp-action="ForgotPassword" asp-route-id="@item.Id" class="btn btn-default btn-info">Reset</a>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts
+{
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#tblData tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}

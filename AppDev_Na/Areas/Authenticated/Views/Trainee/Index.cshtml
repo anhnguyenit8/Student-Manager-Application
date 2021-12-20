@@ -1,0 +1,44 @@
+﻿@model IEnumerable<AppDev_Na.Models.Course>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+<h2>List coures had been assigned</h2>
+<br>
+<br>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Course</th>
+        <th>Descriptions</th>
+        <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var course in Model)
+    {
+        <tr>
+            <td>@course.Name</td>
+            <td>@course.Description</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@course.Id" class="btn btn-default btn-info">Details</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+@section Scripts
+{
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#tblData tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}

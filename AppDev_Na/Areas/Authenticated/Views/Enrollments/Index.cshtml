@@ -1,0 +1,55 @@
+﻿@model IEnumerable<AppDev_Na.Models.Course>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div class="p-4 border rounded bg-white">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-primary">Enrollment View</h2>
+        </div>
+    </div>
+    <div>
+        <form class="form-inline my-2 my-lg-0 float-right">
+            <input id="myInput" class="form-control mr-sm-2" type="text" placeholder="Search">
+        </form>
+    </div>
+    <br/>
+    <br/>
+    <table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Course</th>
+        <th>Category</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody id="tblData">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Category.Name</td>
+            <td>
+                <a asp-controller="Enrollments" asp-action="ChooseCourse" asp-route-id="@item.Id" class="btn btn-default btn-info">Choose Course</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+</div>
+@section Scripts
+{
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#tblData tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}
