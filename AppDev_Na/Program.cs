@@ -20,7 +20,7 @@ namespace AppDev_Na
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseUrls("http://0.0.0:5000");
+                    webBuilder.UseUrls("http://localhost:5001");
                     webBuilder.UseStartup<Startup>();
                 });
     }

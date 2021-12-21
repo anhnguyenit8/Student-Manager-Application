@@ -1,5 +1,4 @@
 C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\bin\Debug\net5.0\appsettings.Development.json
-C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\bin\Debug\net5.0\appsettings.json
 C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\bin\Debug\net5.0\AppDev_Na.exe
 C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\bin\Debug\net5.0\AppDev_Na.deps.json
 C:\Users\MSI_\RiderProjects\AppDev_Na\AppDev_Na\bin\Debug\net5.0\AppDev_Na.runtimeconfig.json
