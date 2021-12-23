@@ -74,11 +74,25 @@
                                 <a asp-controller="Users" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-default btn-info">Edit</a>
                                 <a asp-controller="Users" onclick="return confirm('Are you sure about that ?')" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-default btn-danger btn-info">Delete</a>
                                 <a asp-controller="Users" asp-action="ForgotPassword" asp-route-id="@item.Id" class="btn btn-default btn-info">Reset</a>
+                               
                             }
+                            
+                                var today = DateTime.Now;
+                                var lockday = @item.LockoutEnd;
+                                if (lockday> today)
+                                {
+                                    <a asp-controller="Users" asp-action="LockUnlock" asp-route-id="@item.Id" class="btn btn-default btn-info">Unlock</a>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Users" asp-action="LockUnlock" asp-route-id="@item.Id" class="btn btn-default btn-info">Lock</a>
+                                }
+                            
                         }
                     </td>
                 </tr>
             }
+        
         </tbody>
     </table>
 </div>

@@ -1,4 +1,5 @@
-﻿using System.Composition.Hosting;
+﻿using System;
+using System.Composition.Hosting;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -243,6 +244,38 @@ namespace AppDev_Na.Areas.Authenticated.Controllers
                 }
             }
             return View("ResetPasswordFail");
+        }
+        
+        [Authorize(Roles = Constant.Role_Admin)]
+        [HttpGet]
+        public IActionResult LockUnlock(string id)
+        {
+            var claimsIdentity = (ClaimsIdentity) User.Identity;
+            var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            var claimUser = _db.ApplicationUsers.FirstOrDefault(u => u.Id == claims.Value);
+
+            var applicationUser = _db.ApplicationUsers.FirstOrDefault(u => u.Id == id);
+            if (applicationUser == null)
+            {
+                return NotFound();
+            }
+
+            if (claimUser.Id == applicationUser.Id)
+            {
+                return NotFound();
+            }
+
+            if (applicationUser.LockoutEnd != null && applicationUser.LockoutEnd > DateTime.Now)
+            {
+                applicationUser.LockoutEnd = DateTime.Now;
+            }
+            else
+            {
+                applicationUser.LockoutEnd = DateTime.Now.AddYears(1000);
+            }
+
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
